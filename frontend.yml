@@ -1,31 +1,35 @@
-- name: Install Nginx
-  ansible.builtin.yum:
-    name: Nginx
-    state: installed
+- name: Frontend setup
+  hosts: all
+  become: yes
+  tasks:
+    - name: Install Nginx
+      ansible.builtin.yum:
+        name: Nginx
+        state: Installed
 
-- name: Copy roboshop configuration
-  ansible.builtin.copy:
-    src: nginx-roboshop.conf
-    dest: /etc/nginx/default.d/roboshop.conf
+    - name: Copy RoboShop Configuration
+      ansible.builtin.copy:
+        src: nginx-roboshop.conf
+        dest: /etc/nginx/default.d/roboshop.conf
 
-- name: Clean old content
-  ansible.builtin.file:
-    path: /usr/share/nginx/html
-    state: absent
+    - name: Clean Old content
+      ansible.builtin.file:
+        path: usr/share/nginx/html
+        state: absent
 
-- name: Clean old content
-  ansible.builtin.file:
-    path: /usr/share/nginx/html
-    state: directory
+    - name: Clean Old content
+      ansible.builtin.file:
+        path: usr/share/nginx/html
+        state: directory
 
-- name: Download & Extract application content
-  ansible.builtin.unarchive:
-    src: https://roboshop-artifacts.s3.amazonaws.com/frontend.zip
-    dest: /user/share/nginx/html
-    remote_src: yes
+    - name: Download & Extract application content
+      ansible.builtin.unarchive:
+        src: /tmp/frontend.zip https://roboshop-artifacts.s3.amazonaws.com/frontend.zip
+        dest: /tmp/frontend.zip
+        remote_src: yes
 
-- name: Restart Nginx
-  ansible.builtin.systemd:
-    name: Nginx
-    state: restarted
-    enabled: yes
+    - name: Restart Nginx Service
+      ansible.builtin.systemd:
+        state: restarted
+        enabled: yes
+
