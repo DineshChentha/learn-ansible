@@ -4,11 +4,11 @@
   tasks:
     - name: Install Python
       ansible.builtin.yum:
-      name:
-        - python36
-        - gcc
-        - python3-devel
-      state: installed
+        name:
+          - python36
+          - gcc
+          - python3-devel
+        state: installed
 
     - name: App-preq
       ansible.builtin.import_tasks: app-preq.yml
