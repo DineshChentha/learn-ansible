@@ -4,4 +4,4 @@
     state: installed
 
 - name: Load user schema
-  ansible.builtin.shell: mysql --host mysql-dev.devopsbatch74.online </app/schema/{{component}}.js
+  ansible.builtin.shell: mysql --host mysql-dev.devopsbatch74.online -uroot -pRoboshop@1 < /app/schema/{{component}}.sql
