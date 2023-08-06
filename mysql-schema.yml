@@ -1,0 +1,7 @@
+- name: Install mysql Client
+  ansible.builtin.yum:
+    name: mysql
+    state: installed
+
+- name: Load user schema
+  ansible.builtin.shell: mysql --host mysql-dev.devopsbatch74.online </app/schema/{{component}}.js

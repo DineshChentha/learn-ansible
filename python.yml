@@ -1,0 +1,23 @@
+- name: Python Setup
+  hosts: all
+  become: yes
+  tasks:
+    - name: Install Python
+      ansible.builtin.yum:
+      name:
+        - python36
+        - gcc
+        - python3-devel
+      state: installed
+
+    - name: App-preq
+      ansible.builtin.import_tasks: app-preq.yml
+
+    - name: Download Python Dependencies
+      ansible.builtin.shell: pip3.6 install -r requirements.txt
+      args:
+        chdir: /app
+
+    - name: Systemd setup
+      ansible.builtin.import_tasks: systemd.yml
+
