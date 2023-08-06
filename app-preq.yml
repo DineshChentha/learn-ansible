@@ -12,7 +12,7 @@
 
 - name: Download & Extract application content
   ansible.builtin.unarchive:
-    src: https://roboshop-artifacts.s3.amazonaws.com/${component}.zip
-    dest: /tmp/${component}.zip
+    src: https://roboshop-artifacts.s3.amazonaws.com/{{component}}.zip
+    dest: /tmp/{{component}}.zip
     remote_src: yes
 
